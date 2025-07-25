@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lahan Basah Hijau</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    html {
+  scroll-behavior: smooth;
+}
+
+    body {
+      font-family: 'Fredoka', sans-serif;
+      background-color: #f0faff;
+      overflow-x: hidden;
+    }
+
+    .navbar-nav .nav-link {
+    padding: 8px 16px;
+    transition: all 0.3s ease;
+    border-radius: 20px;
+  }
+
+  .navbar-nav .nav-link:hover {
+    background-color: #f0f8ff;
+    color: #0d6efd;
+  }
+
+  .navbar-nav .nav-link.active {
+    background-color: #d1e7ff;
+    color: #0d6efd;
+  }
+    .hero {
+      background: linear-gradient(to bottom, #b3e9ff, #d1fce5);
+      padding: 100px 20px 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border-radius: 0 0 60px 60px;
+      border: 4px solid rgba(255,255,255,0.6);
+    }
+    
+    .hero-title {
+      color: #035397;
+      font-size: 3.2rem;
+      font-weight: 700;
+      text-shadow: 2px 2px #ffffff;
+    }
+    .hero-subtitle {
+      color: #0b6c5f;
+      font-size: 1.25rem;
+      margin-bottom: 20px;
+    }
+    .main-button {
+      background-color: #2e8b57;
+      color: white;
+      font-size: 1.2rem;
+      padding: 12px 32px;
+      border-radius: 40px;
+      margin-top: 20px;
+      transition: all 0.3s ease;
+      margin-right: 20px;
+    }
+    .main-button:hover {
+      background-color: #256b45;
+    }
+
+    .main-button2 {
+      border: 1px solid #2e8b57;
+      color: black;
+      font-size: 1.2rem;
+      padding: 12px 32px;
+      border-radius: 40px;
+      margin-top: 20px;
+      transition: all 0.3s ease;
+      margin-right: 20px;
+    }
+    .main-button2:hover {
+      background-color: #256b45;
+      color: white;
+    }
+
+    .bird {
+      position: absolute;
+      top: 80px;
+      left: -100px;
+      width: 5%;
+      animation: flyBird 10s linear infinite;
+      animation-delay: 0s;
+      z-index: 1;
+    }
+
+    .bird1 {
+      position: absolute;
+      top: 100px;
+      left: -100px;
+      width: 10%;
+      animation: flyBird 15s linear infinite;
+      animation-delay: 5s;
+      z-index: 1;
+    }
+
+    .bird2 {
+      position: absolute;
+      top: 50px;
+      left: -150px;
+      width: 10%;
+      animation: flyBird 20s linear infinite;
+      animation-delay: 10s;
+      z-index: 1;
+    }
+
+    .bird3 {
+      position: absolute;
+      top: 50px;
+      left: -200px;
+      width: 10%;
+      animation: flyBird 25s linear infinite;
+      animation-delay: 15s;
+      z-index: 1;
+    }
+
+    .bird4 {
+      position: absolute;
+      top: 50px;
+      left: -150px;
+      width: 5%;
+      animation: flyBird 20s linear infinite;
+      animation-delay: 5s;
+      z-index: 1;
+    }
+    
+    @keyframes flyBird {
+      0% { transform: translateX(0) rotate(0deg); }
+      100% { transform: translateX(120vw) rotate(10deg); }
+    }
+    
+
+    .menu-links {
+      margin-top: 50px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+    .menu-card {
+      width: 160px;
+      height: 140px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+      border: 4px solid rgba(255,255,255,0.6);
+  cursor: pointer;
+    }
+    .menu-card:hover {
+  transform: scale(1.05) rotate(-1deg);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+    .modul { background-color: #FFD93D; }
+    .kuis { background-color: #3AB0FF; }
+    .simulasi { background-color: #78C850; }
+    .proyek { background-color: #FF6B6B; }
+    .leaderboard { background-color: #9D4EDD; }
+
+  .menu-icon {
+  width: 100px;
+  height: 100px;
+}
+@keyframes popIcon {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+    .hero img.character {
+      position: absolute;
+      right: 40px;
+      bottom: 0;
+      max-height: 320px;
+    }
+    .cloud {
+      position: absolute;
+      top: -70px;
+      left: 10%;
+      width: 30%;
+      animation: floatCloud 40s linear infinite;
+    }
+    .cloud2 {
+      top: 60px;
+      left: 60%;
+      width: 30%;
+      animation-delay: 10s linear infinite;
+    }
+
+    .cloud3 {
+      top: 30px;
+      left: -20%;
+      width: 30%;
+      animation-delay: 20s linear infinite;
+    }
+
+    @keyframes floatCloud {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(100vw); }
+    }
+
+    @keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+.hero img.character {
+  position: absolute;
+  right: -10px;     /* digeser lebih kanan */
+  bottom: 10px;     /* dinaikkan sedikit agar tidak menutupi tombol */
+  max-height: 250px;
+  pointer-events: none;
+  animation: bounce 2.5s ease-in-out infinite;
+  z-index: 2;
+}
+
+.hero img.puzzle {
+  position: absolute;
+  left: -10px;
+  bottom: 10px; /* geser ke bawah agar menyentuh batas bawah hero */
+  max-height: 250px;
+  width: auto;
+  animation: swayPuzzle 4s ease-in-out infinite;
+  z-index: 2;
+}
+@keyframes swayPuzzle {
+  0% { transform: rotate(0deg) translateY(0); }
+  25% { transform: rotate(-2deg) translateY(2px); }
+  50% { transform: rotate(0deg) translateY(0); }
+  75% { transform: rotate(2deg) translateY(-2px); }
+  100% { transform: rotate(0deg) translateY(0); }
+}
+
+
+    .footer-wave {
+  position: relative;
+  margin-top: 60px;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.footer-wave svg {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100px;
+}
+
+
+    @media (max-width: 768px) {
+  .hero {
+    padding: 80px 20px 40px;
+  }
+
+  .hero-title {
+    font-size: 2.2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .main-button {
+    font-size: 1rem;
+    padding: 10px 24px;
+  }
+
+  .main-button2 {
+    font-size: 1rem;
+    padding: 10px 24px;
+  }
+
+  .hero img.character {
+    position: static;
+    display: none;
+    margin: 20px auto 0;
+    max-height: 200px;
+    animation: bounce 2.5s ease-in-out infinite;
+  }
+
+  .menu-links {
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 40px;
+  }
+
+  .menu-card {
+    width: 80%;
+    height: auto;
+    padding: 20px;
+    font-size: 1.1rem;
+  }
+
+  .cloud,
+  .cloud2,
+  .cloud3,
+  .bird,
+  .bird1 {
+    margin-top: 80px;
+  }
+  .hero img.puzzle{
+   height: auto;
+   width: auto;
+   padding: 20px;
+   position: static;
+}
+
+    }
+
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top" style="z-index: 1030;">
+  <div class="container">
+    <!-- Logo -->
+    <a class="navbar-brand fw-bold text-primary" href="/modul/modul.html">
+      <img src="foto/logo.png" alt="Logo" width="60" class="me-2" />
+      Lahan Basah Hijau
+    </a>
+
+    <!-- Toggler for mobile -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Menu -->
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav fw-semibold">
+        <li class="nav-item">
+          <a class="nav-link active" href="/modul/modul.html">🏠 Beranda</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/kuis/kuis.html">🧠 Kuis</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/simulasi/simulasi.html">🧪 Simulasi</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/proyek/proyek.html">💡 Proyek</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/leaderboard/leaderboard.html">🏆 Papan Peringkat</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<section class="hero">
+  <img src="/modul/foto/cloud1.png" class="cloud" alt="Cloud">
+  <img src="/modul/foto/cloud2.png" class="cloud cloud2" alt="Cloud 2">
+  <img src="/modul/foto/daun1.png" class="bird" alt="Daun">
+  <img src="/modul/foto/cloud1.png" class="cloud cloud3" alt="Cloud 2">
+  <img src="/modul/foto/alat/7.png" class="bird1" alt="Alat">
+  <img src="/modul/foto/alat/8.png" class="bird2" alt="Alat">
+  <img src="/modul/foto/alat/9.png" class="bird3" alt="Alat">
+  <img src="/modul/foto/daun2.png" class="bird4" alt="Daun">
+
+  <div class="container">
+    <h1 class="hero-title" data-aos="zoom-in">Lahan Basah Hijau</h1>
+    <p class="hero-subtitle" data-aos="fade-up">Aplikasi Pembelajaran Interaktif Berbasis STEM</p>
+    <a href="#modul" class="btn main-button shadow" data-aos="fade-up" data-aos-delay="100">Mulai Belajar</a>
+    <a href="/proyek/proyek.html/#gallery-title" class="btn main-button2 shadow" data-aos="fade-up" data-aos-delay="100">Lihat Galeri Proyek Pengguna</a>
+
+    <div class="menu-links" data-aos="fade-up" data-aos-delay="200">
+  <a href="#modul" class="menu-card modul">
+    <img src="foto/modul.png" alt="Modul" class="menu-icon">
+    Modul
+    <p>Pembelajaran</p>
+  </a>
+  <a href="/kuis/kuis.html" class="menu-card kuis">
+    <img src="foto/kuis.png" alt="kuis" class="menu-icon">
+    Kuis
+  </a>
+  <a href="/simulasi/simulasi.html" class="menu-card simulasi">
+    <img src="foto/simulasi.png" alt="Simulasi" class="menu-icon">
+    Simulasi
+    <p>Ekosistem</p>
+  </a>
+  <a href="/proyek/proyek.html" class="menu-card proyek">
+    <img src="foto/proyek.png" alt="Proyek" class="menu-icon">
+    Proyek
+    <p>Ekosistem</p>
+  </a>
+  <a href="/leaderboard/leaderboard.html" class="menu-card leaderboard">
+    <img src="foto/leaderboard.png" alt="Leaderboard" class="menu-icon">
+    Leaderboard
+    <p>Kuis</p>
+  </a>
+</div>
+
+  </div>
+
+  <img src="/modul/foto/children.png" alt="Tas" class="character" loading="eager">
+  <img src="/modul/foto/alat/6.png" alt="Puzzle" class="puzzle">
+
+
+</section>
+
+<section class="py-5" id="modul">
+  <div class="container text-center position-relative">
+
+    <div class="text-center mb-5">
+      <img src="foto/modul.png" alt="Modul Icon" style="width: 100px;" class="mb-3" data-aos="zoom-in" />
+      <h2 class="fw-bold" data-aos="fade-up" style="color: #333;">Modul Pembelajaran</h2>
+    </div>
+
+    <ul class="nav nav-tabs justify-content-center mb-4 bg-white rounded-pill shadow-sm px-3 py-2" id="modulTabs" role="tablist">
+      <li class="nav-item" >
+        <button class="nav-link active rounded-pill text-dark fw-semibold"  data-bs-toggle="tab" data-bs-target="#pengertian" type="button">
+          Pengertian
+        </button>
+      </li>
+      <li class="nav-item" >
+        <button class="nav-link rounded-pill text-dark fw-semibold"  data-bs-toggle="tab" data-bs-target="#jenis" type="button">
+          Jenis-Jenis
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link rounded-pill text-dark fw-semibold"  data-bs-toggle="tab" data-bs-target="#manfaat" type="button">
+          Manfaat
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link rounded-pill text-dark fw-semibold"  data-bs-toggle="tab" data-bs-target="#ekosistem" type="button">
+          Ekosistem & Rantai Makanan
+        </button>
+      </li>
+      <li class="nav-item" >
+        <button class="nav-link rounded-pill text-dark fw-semibold"  data-bs-toggle="tab" data-bs-target="#kualitasAir" type="button">
+          Kualitas Air
+        </button>
+      </li>
+      <li class="nav-item" >
+        <button class="nav-link rounded-pill text-dark fw-semibold"  data-bs-toggle="tab" data-bs-target="#limbah" type="button">
+          Pengelolaan Limbah
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link rounded-pill text-dark fw-semibold"  data-bs-toggle="tab" data-bs-target="#ancaman" type="button">
+          Ancaman
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link rounded-pill text-dark fw-semibold"  data-bs-toggle="tab" data-bs-target="#upaya" type="button">
+          Cara Menjaga
+        </button>
+      </li>
+    </ul>
+
+    <div class="tab-content bg-white rounded shadow p-4" id="modulTabsContent">
+      <div class="tab-pane fade show active" id="pengertian" role="tabpanel">
+        <h4 class="text-success">Pengertian Lahan Basah</h4>
+        <p class="text-dark" style="text-align: justify;">Lahan basah adalah daerah yang sering tergenang air, baik oleh air hujan, sungai, danau, ataupun air laut. Daerah ini bisa berupa rawa, hutan bakau (mangrove), lahan gambut, atau danau yang tidak terlalu dalam. Airnya bisa: <ul style="text-align: justify;"><li>Tawar seperti air sungai.</li><li>Payau yaitu campuran air laut dan air sungai.</li><li>Asin seperti air laut.</li></ul></p><p style="text-align: justify;"><b>Ciri-ciri lahan basah:</b></p><ul style="text-align: justify;"><li>Ada air yang menggenang sebagian atau sepanjang tahun.</li><li>Banyak tumbuhan dan hewan khas yang hidup di dalamnya.</li><li>Tanahnya basah, lembek, dan mengandung banyak air.</li><li>Sering ada lumpur atau tanaman air.</li></ul></p>
+        <p style="text-align: justify;">Lahan basah bisa kita temukan di daerah dataran rendah, di pinggir sungai, atau di sepanjang pantai.</p>
+      </div>
+      <div class="tab-pane fade" id="jenis" role="tabpanel">
+        <h4 class="text-success">Jenis-Jenis Lahan Basah</h4>
+        <p class="text-dark" style="text-align: justify;">Ada beberapa jenis lahan basah yang bisa kita kenali dan temukan di sekitar kita:
+<ul style="text-align: justify;"><li><b>Rawa Tanah</b> luas yang digenangi air, biasanya ditumbuhi tanaman liar seperti rumput rawa, atau pohon-pohon tinggi seperti pohon galam.</li>
+<li><b>Lahan Gambut Tanah</b> yang terbentuk dari tumpukan daun dan ranting yang membusuk selama ratusan bahkan ribuan tahun. Tanah ini sangat lembab dan bisa terbakar bila kering.</li>
+<li><b>Hutan Mangrove (Bakau)</b> Hutan di pinggir pantai yang akarnya menonjol keluar dari tanah. Tempat ini sangat penting karena menjadi rumah bagi kepiting, ikan kecil, dan banyak jenis burung.</li>
+<li><b>Sungai dan Danau Dangkal</b> Tempat air yang tenang dan tidak terlalu dalam. Bisa jadi tempat bermain ikan, burung air, dan tanaman air seperti teratai.</li></ul></p>
+      </div>
+      <div class="tab-pane fade" id="ancaman" role="tabpanel">
+        <h4 class="text-success">Ancaman terhadap Lahan Basah</h4>
+        <p class="text-dark" style="text-align: justify;">Sayangnya, lahan basah bisa rusak jika tidak dijaga dengan baik. Beberapa hal yang bisa merusak lahan basah adalah: <ul style="text-align: justify;"><li><b>Alih Fungsi Lahan:</b> Diubah menjadi gedung, rumah, sawah, atau tambak besar.</li><li><b>Kebakaran Lahan:</b> Terutama di lahan gambut saat musim kemarau.</li><li><b>Sampah dan Limbah:</b> Mencemari air dan meracuni hewan air.</li><li><b>Penebangan Pohon Liar:</b> Merusak tempat tinggal hewan.</li><li><b>Air Asam dari Tanah:</b> Menghasilkan air sangat asam yang berbahaya.</li></ul></p>
+      </div>
+      <div class="tab-pane fade" id="upaya" role="tabpanel">
+        <h4 class="text-success">Cara Menjaga</h4>
+        <p class="text-dark" style="text-align: justify;">Lahan basah harus kita jaga agar tetap ada dan bermanfaat untuk masa depan. Caranya bisa dimulai dari hal-hal kecil:<ul style="text-align: justify;"><li>Tidak membuang sampah ke sungai, rawa, atau danau.</li><li>Tidak menebang pohon secara sembarangan di hutan bakau atau rawa.</li><li>Tidak membakar lahan gambut atau semak-semak di musim kemarau.</li><li>Menanam kembali pohon-pohon di lahan yang rusak.</li><li>Menjaga hewan dan tumbuhan di lahan basah supaya tidak punah.</li><li>Ikut serta dalam kegiatan lingkungan, seperti bersih-bersih sungai.</li></ul></p>
+<p style="text-align: justify;">Bahkan anak-anak dan remaja bisa ikut menjaga lahan basah dengan cara belajar, bercerita ke teman-teman, dan ikut kegiatan sekolah tentang lingkungan.</p>
+      </div>
+      <div class="tab-pane fade" id="manfaat" role="tabpanel">
+        <h4 class="text-success">Manfaat Lahan Basah bagi Lingkungan dan Manusia</h4>
+        <p class="text-dark" style="text-align: justify;">Lahan basah sangat bermanfaat bagi alam dan juga untuk manusia. Berikut ini beberapa manfaatnya:</p>
+<p style="text-align: justify;"><b>🌿 Untuk Lingkungan:</b></p><ul style="text-align: justify;"><li>Menyimpan air seperti spons, membantu saat musim kemarau.</li><li>Mencegah banjir saat hujan deras datang.</li><li>Membersihkan air, karena tanah dan tumbuhan menyaring kotoran dan limbah.</li><li>Menjadi rumah hewan seperti ikan, udang, katak, burung, dan bekantan (monyet berhidung panjang yang hanya ada di Kalimantan).</li> <li>Menjaga udara tetap sejuk dan bersih karena banyak pohon dan tumbuhan yang tumbuh.</li><li>Menjaga keseimbangan ekosistem dengan menjadi tempat hidup banyak makhluk hidup yang saling bergantung.</li></ul>
+<p style="text-align: justify;"><b>👨‍🌾 Untuk Manusia:</b></p><ul style="text-align: justify;"><li>Tempat mencari ikan dan tanaman seperti purun (bahan tikar).</li><li>Tempat bertani, contohnya bertanam padi di sawah rawa.</li><li>Jalur transportasi, orang bisa naik perahu melalui sungai atau rawa.</li><li>Tempat wisata dan belajar tentang alam, tumbuhan, dan hewan.</li><li>Tempat tinggal masyarakat yang hidup dari hasil alam lahan basah.</li></ul> 
+      </div>
+      <div class="tab-pane fade" id="ekosistem" role="tabpanel">
+        <h4 class="text-success">Ekosistem dan Rantai Makanan di Lahan Basah</h4>
+        <p class="text-dark" style="text-align: justify;">Lahan basah memiliki ekosistem yang unik dan lengkap. Di sana ada: <ul style="text-align: justify;"><li><b>Produsen:</b> seperti tanaman air, rumput rawa, dan pohon bakau.</li><li><b>Konsumen pertama:</b> seperti keong, udang kecil, dan ikan kecil yang memakan tumbuhan.</li><li><b>Konsumen kedua:</b> ikan besar, burung air, dan ular yang memakan hewan kecil</li><li><b>Pengurai:</b> seperti cacing, bakteri, dan jamur yang membantu menguraikan sisa makhluk hidup.</li></ul>
+<p style="text-align: justify;">Contoh rantai makanan: Rumput rawa → keong → burung bangau → elang rawa.</p><p style="text-align: justify;">Rantai makanan ini penting untuk menjaga keseimbangan alam. Jika satu makhluk punah, makhluk lain bisa ikut terganggu.</p>
+      </div>
+      <div class="tab-pane fade" id="kualitasAir" role="tabpanel">
+        <h4 class="text-success">Kualitas Air di Lahan Basah</h4>
+        <p class="text-dark" style="text-align: justify;">Lahan basah bisa membantu meningkatkan kualitas air dengan cara menyaring air dari limbah dan kotoran.</p><ul style="text-align: justify;"><li>Akar tanaman menyerap zat berbahaya dari air.</li><li>Lumpur menyaring logam berat dan bahan kimia.</li><li>Mikroorganisme membantu menguraikan kotoran.</li></ul>
+      </div>
+      <div class="tab-pane fade" id="limbah" role="tabpanel">
+        <h4 class="text-success">Pengelolaan Limbah agar Lahan Basah Tetap Bersih</h4>
+        <p class="text-dark" style="text-align: justify;">Limbah adalah sisa dari kegiatan kita sehari-hari, seperti bungkus makanan, botol plastik, atau air sabun bekas mencuci. Kalau dibuang sembarangan, limbah bisa mencemari sungai, tanah, dan membahayakan hewan serta tumbuhan. Maka terlalu banyak limbah masuk ke lahan basah:</p><ul style="text-align: justify;"><li>Air bisa menjadi keruh, bau, dan beracun.</li><li>Ikan dan tumbuhan bisa mati.</li><li>Manusia tidak bisa menggunakan air itu lagi.</li></ul> 
+<p style="text-align: justify;"><b>Cara mencegahnya:</b></p><ul style="text-align: justify;"><li>Buang sampah pada tempatnya.</li><li>Jangan buang minyak, sabun, atau bahan kimia ke saluran air.</li><li>Gunakan produk ramah lingkungan.</li></ul>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--Musik-->
+<audio id="bg-music" autoplay loop>
+  <source src="/modul/sound/sound2.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Tombol Musik -->
+<button id="music-toggle"
+        class="btn btn-light rounded-circle shadow position-fixed position-absolute d-flex align-items-center justify-content-center"
+        style="bottom: 20px; right: 20px; width: 50px; height: 50px; z-index: 9999;"
+        title="Nyalakan/Matikan Musik">
+  <span id="music-icon">🔊</span>
+</button>
+
+<!-- Toast -->
+<div id="music-toast"
+     class="position-fixed bottom-0 end-0 mb-5 me-3 p-3 bg-white rounded shadow text-dark fw-semibold"
+     style="z-index: 9999; display: none; transition: opacity 0.5s ease;">
+  Musik Dimatikan
+</div>
+
+
+<footer class="bg-light text-center text-lg-start shadow-top bg-white">
+  <div class="container py-4">
+
+    <div class="row align-items-center">
+      <div class="col-md-6 text-md-start text-center mb-3 mb-md-0">
+        <h5 class="fw-bold text-primary">
+          <img src="/modul/foto/logo.png" alt="Logo" width="60" class="me-2">
+          Lahan Basah Hijau
+        </h5>
+        <p class="text-muted small mb-0">
+          Aplikasi pembelajaran interaktif berbasis STEM untuk mengenal, menjaga, dan mencintai lahan basah.
+        </p>
+      </div>
+      <div class="col-md-6 text-md-end text-center">
+        <ul class="list-inline mb-0">
+          <li class="list-inline-item mx-2"><a href="/modul/modul.html" class="text-decoration-none text-muted">Beranda</a></li>
+          <li class="list-inline-item mx-2"><a href="/kuis/kuis.html" class="text-decoration-none text-muted">Kuis</a></li>
+          <li class="list-inline-item mx-2"><a href="/simulasi/simulasi.html" class="text-decoration-none text-muted">Simulasi</a></li>
+          <li class="list-inline-item mx-2"><a href="/proyek/proyek.html" class="text-decoration-none text-muted">Proyek</a></li>
+          <li class="list-inline-item mx-2"><a href="/leaderboard/leaderboard.html" class="text-decoration-none text-muted">Papan Peringkat</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+  <div class="text-center bg-white py-3 border-top">
+    <small class="text-muted">© 2025 Lahan Basah Hijau. Semua hak dilindungi.</small>
+  </div>
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+  const music = document.getElementById('bg-music');
+  const toggleBtn = document.getElementById('music-toggle');
+  const icon = document.getElementById('music-icon');
+  const toast = document.getElementById('music-toast');
+
+  function updateIcon() {
+    icon.textContent = music.paused ? '🔇' : '🔊';
+  }
+
+  function showToast(message) {
+    toast.textContent = message;
+    toast.style.display = 'block';
+    toast.style.opacity = '1';
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      setTimeout(() => (toast.style.display = 'none'), 500);
+    }, 2000);
+  }
+
+  toggleBtn.addEventListener('click', () => {
+    if (music.paused) {
+      music.play().then(() => {
+        updateIcon();
+        showToast('Musik Dinyalakan');
+      }).catch(() => {});
+    } else {
+      music.pause();
+      updateIcon();
+      showToast('Musik Dimatikan');
+    }
+  });
+
+  // Autoplay fix: play after first interaction if needed
+  document.addEventListener('DOMContentLoaded', () => {
+    const tryPlay = () => {
+      if (music.paused) {
+        music.play().then(updateIcon).catch(() => {});
+      } else {
+        updateIcon();
+      }
+      document.body.removeEventListener('click', tryPlay);
+    };
+    document.body.addEventListener('click', tryPlay);
+  });
+  AOS.init();
+</script>
+</body>
+</html>
