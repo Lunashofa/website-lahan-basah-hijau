@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simulasi Interaktif - Lahan Basah Hijau</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Fredoka', sans-serif;
+      background-color: #f0faff;
+      overflow-x: hidden;
+    }
+
+    .navbar-nav .nav-link {
+      padding: 8px 16px;
+      transition: all 0.3s ease;
+      border-radius: 20px;
+    }
+
+    .navbar-nav .nav-link:hover {
+      background-color: #f0f8ff;
+      color: #0d6efd;
+    }
+
+    .navbar-nav .nav-link.active {
+      background-color: #d1e7ff;
+      color: #0d6efd;
+    }
+
+    .simulasi-hero {
+      background: linear-gradient(to bottom, #b3e9ff, #d1fce5);
+      padding: 100px 20px 60px;
+      text-align: center;
+      border-radius: 0 0 60px 60px;
+      border: 4px solid rgba(255, 255, 255, 0.6);
+      position: relative;
+    }
+
+    .simulasi-hero h1 {
+      color: #035397;
+      font-size: 3rem;
+      font-weight: 700;
+      text-shadow: 2px 2px #ffffff;
+    }
+
+    .simulasi-hero p {
+      color: #0b6c5f;
+      font-size: 1.25rem;
+      margin-bottom: 30px;
+    }
+
+    .simulasi-area {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      margin-top: -40px;
+    }
+
+    #area-ekosistem {
+      min-height: 250px;
+      border: 2px dashed #198754;
+      border-radius: 15px;
+      padding: 1rem;
+      background-color: #e9f7ef;
+      text-align: center;
+      transition: background 0.3s ease;
+    }
+
+    #area-ekosistem.highlight-strong {
+  animation: softGlow 2.5s ease-in-out infinite;
+  box-shadow: 0 0 12px 3px #7be6c5;
+  border: 2px dashed #52c99f;
+}
+
+@keyframes softGlow {
+  0% {
+    box-shadow: 0 0 6px #a3f0db;
+  }
+  50% {
+    box-shadow: 0 0 14px 4px #7be6c5;
+  }
+  100% {
+    box-shadow: 0 0 6px #a3f0db;
+  }
+}
+
+
+    .drag-item {
+      cursor: move;
+      user-select: none;
+      padding: 12px;
+      border-radius: 15px;
+      background-color: #ffffff;
+      border: 2px solid #d0f0e0;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      display: flex;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .drag-item:hover {
+      background-color: #e6fffa;
+      transform: scale(1.05);
+    }
+
+    .drag-item img {
+         max-width: 64px;
+  max-height: 64px;
+  width: auto;
+  height: auto;
+  transition: transform 0.3s ease;
+    }
+
+    .drag-item:hover img {
+  transform: scale(1.1);
+}
+
+
+    .impact-box {
+      margin-top: 1rem;
+      min-height: 100px;
+      border-radius: 15px;
+      text-align: center;
+      font-size: 1.1rem;
+      background: #e7f5ff;
+      padding: 1rem;
+      transition: background 0.3s ease;
+    }
+
+    .footer-wave {
+      position: relative;
+      margin-top: 60px;
+      overflow: hidden;
+      line-height: 0;
+    }
+
+    footer {
+      background: #f8f9fa;
+      font-size: 0.9rem;
+    }
+
+    .highlight-drop {
+      animation: blink 1s infinite alternate;
+    }
+
+    @keyframes blink {
+      from {
+        border-color: #28a745;
+      }
+      to {
+        border-color: #6c757d;
+      }
+    }
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.hero-text {
+  max-width: 500px;
+  padding: 0 15px;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .simulasi-hero {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .chat-bubble,
+  .character-illustration {
+    position: static;
+  }
+
+  .simulasi-hero h1 {
+    font-size: 2rem;
+  }
+
+  .simulasi-hero p {
+    font-size: 1rem;
+  }
+  
+}
+
+.chat-bubble::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 10px solid transparent;
+  border-bottom-color: #ffffff;
+}
+
+.chat-bubble.start {
+  left: 0;
+  transform: translateX(-40%);
+}
+.chat-bubble.start::after {
+  left: 40px;
+  border-top-color: #ffffff;
+}
+
+.chat-bubble.end {
+  right: 0;
+  transform: translateX(40%);
+}
+.chat-bubble.end::after {
+  right: 40px;
+  border-top-color: #ffffff;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.ilustrasi-cerpen {
+  max-height: 400px;
+  object-fit: cover;
+  border: 4px solid #d1fce5;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+@media (max-width: 576px) {
+  .chat-bubble,
+  .character-illustration {
+    position: static;
+  }
+}
+.cloud {
+      position: absolute;
+      top: 10px;
+      left: 10%;
+      width: 30%;
+      animation: floatCloud 40s linear infinite;
+    }
+    .cloud2 {
+      top: 60px;
+      left: 60%;
+      width: 30%;
+      animation-delay: 10s linear infinite;
+    }
+
+    .cloud3 {
+      top: 30px;
+      left: -20%;
+      width: 30%;
+      animation-delay: 20s linear infinite;
+    }
+
+    @keyframes floatCloud {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(100vw); }
+    }
+
+    .karakter-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.character-with-chat {
+  display: inline-block;
+  white-space: normal;
+  flex-direction: column;
+  align-items: center;
+}
+
+.character-illustration {
+  width: 120px;
+  height: auto;
+  position: relative;
+}
+
+.chat-bubble {
+  background: white;
+  border-radius: 15px;
+  padding: 10px 15px;
+  margin-top: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 180px;
+  font-weight: 500;
+  position: relative;
+}
+
+/* Responsif untuk layar kecil */
+@media (max-width: 576px) {
+  .karakter-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.float {
+  animation: float 3s ease-in-out infinite;
+}
+
+#aktivitas-list .card {
+  cursor: grab;
+  transition: transform 0.2s;
+}
+
+#aktivitas-list .card:hover {
+  transform: scale(1.03);
+}
+
+.character-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.character-img {
+  width: 100px;
+  max-width: 100%;
+  height: auto;
+  position: relative;
+}
+
+.bubble {
+  padding: 10px 15px;
+  border-radius: 15px;
+  max-width: 160px;
+  font-size: 0.9rem;
+  position: relative;
+}
+
+
+
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top" style="z-index: 1030;">
+  <div class="container">
+    <!-- Logo -->
+    <a class="navbar-brand fw-bold text-primary" href="/modul/modul.html">
+      <img src="/modul/foto/logo.png" alt="Logo" width="60" class="me-2" />
+      Lahan Basah Hijau
+    </a>
+
+    <!-- Toggler for mobile -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Menu -->
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav fw-semibold">
+        <li class="nav-item">
+          <a class="nav-link" href="/modul/modul.html">🏠 Beranda</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/kuis/kuis.html">🧠 Kuis</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/simulasi/simulasi.html">🧪 Simulasi</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/proyek/proyek.html">💡 Proyek</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/leaderboard/leaderboard.html">🏆 Papan Peringkat</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  <!-- Hero Section -->
+  <section class="simulasi-hero d-flex flex-column flex-md-row align-items-center justify-content-center text-center gap-4" data-aos="fade-up">
+    <img src="/modul/foto/cloud1.png" class="cloud" alt="Cloud">
+  <img src="/modul/foto/cloud2.png" class="cloud cloud2" alt="Cloud 2">
+  <img src="/modul/foto/cloud1.png" class="cloud cloud3" alt="Cloud 2">
+  
+ 
+
+  <div class="hero-text">
+    <h1>Simulasi Ekosistem Lahan Basah</h1>
+    <p>Membaca cerita pendek lalu seret aktivitas ke area ekosistem dan lihat dampaknya 🌱</p>
+  </div>
+
+<!-- Karakter Berdampingan -->
+<div class="d-flex flex-wrap justify-content-center align-items-end gap-4 my-4">
+  <!-- Kodokko -->
+  <div class="character-box text-center" data-aos="fade-right" data-aos-duration="1000">
+    <img src="/simulasi/foto-simulasi/katak.png" alt="Kodokko" class="character-img mb-2 float" />
+    <div class="bubble bg-white shadow
+    ">Hai! Ayo jaga lahan basah! 🐸</div>
+  </div>
+
+  <!-- Bangau -->
+  <div class="character-box text-center" data-aos="fade-left" data-aos-duration="1000">
+    <img src="/simulasi/foto-simulasi/bangau.png" alt="Bangau" class="character-img mb-2 float" />
+    <div class="bubble bg-white shadow">Siap bantu Kodokko! 🐦</div>
+  </div>
+</div>
+
+
+
+
+  
+</section>
+
+
+
+  <section class="container my-5" data-aos="fade-up" data-aos-delay="150">
+    <div class="p-4 bg-white rounded shadow-sm border">
+      
+      <!-- Gambar Ilustrasi Situasi Cerpen -->
+    <div class="text-center mb-4">
+      <img src="/simulasi/foto-simulasi/background.png" alt="Situasi Lahan Basah" class="img-fluid rounded ilustrasi-cerpen" />
+    </div>
+
+      <h4 class="mb-3 text-primary text-center">📖 Misi Rahasia di Lahan Basah</h4>
+      <p style="text-align: justify;">Di suatu pagi cerah, Kodokko si katak dan Bango si bangau mengamati lahan basah yang mulai berubah. “Eh Bango, kenapa banyak plastik di sungai?” tanya Kodokko gelisah.</p>
+      <p style="text-align: justify;">“Itu karena manusia membuang <strong>limbah</strong> sembarangan,” jawab Bango. “Dan lihat, pohon-pohon itu ditebang tanpa izin. Habitat kita jadi rusak!” tambahnya sambil menunjuk penebangan liar.</p>
+      <p style="text-align: justify;">Mereka pun memutuskan memulai <strong>restorasi</strong> (menanam kembali tanaman air dan membersihkan sungai). Kodokko juga memanggil anak-anak manusia untuk ikut <strong>edukasi lingkungan</strong> lewat lomba mewarnai dan menanam eceng gondok.</p>
+      <p style="text-align: justify;">“Setiap aktivitas bisa berdampak besar, baik atau buruk,” kata Bango. “Makanya yuk bantu kami memilih tindakan yang menjaga ekosistem!”</p>
+      <p class="mb-0 fw-semibold text-success">🧪 Sekarang giliran kalian mencoba simulasinya dan bantu Kodokko & Bango menyelamatkan rumah mereka!</p>
+    </div>
+  </section>
+
+  <!-- Simulasi Area -->
+<main class="container my-5">
+  <div class="p-4 bg-white rounded shadow-sm border simulasi-area" data-aos="fade-up" data-aos-delay="200">
+
+    <!-- Area Ekosistem -->
+    <div class="mb-4" data-aos="zoom-in">
+      <h5 class="mb-3">🧪 Area Ekosistem:</h5>
+      <div id="area-ekosistem" class="p-4 bg-light border border-success rounded">
+        <p class="text-muted m-0">Seret aktivitas ke dalam area ini dam lihat dampaknya di bawah.</p>
+      </div>
+    </div>
+
+    <!-- Aktivitas -->
+<div class="mb-4" data-aos="fade-up">
+  <h5 class="mb-3">🔧 Aktivitas:</h5>
+  <div id="aktivitas-list" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 gx-4 gy-3">
+    <!-- Aktivitas akan diisi di sini melalui JS atau HTML -->
+  </div>
+</div>
+
+
+    
+
+    <!-- Dampak -->
+    <div data-aos="fade-in" data-aos-delay="300">
+      <h5 class="mb-3">📘 Dampak Aktivitas:</h5>
+      <div id="dampak-area" class="impact-box p-3 bg-info bg-opacity-10 rounded">
+        Dampak aktivitas akan muncul di sini.
+      </div>
+    </div>
+
+  </div>
+</main>
+
+
+<!--Musik-->
+<audio id="bg-music" autoplay loop>
+  <source src="/modul/sound/sound2.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Tombol Musik -->
+<button id="music-toggle"
+        class="btn btn-light rounded-circle shadow position-fixed position-absolute d-flex align-items-center justify-content-center"
+        style="bottom: 20px; right: 20px; width: 50px; height: 50px; z-index: 9999;"
+        title="Nyalakan/Matikan Musik">
+  <span id="music-icon">🔊</span>
+</button>
+
+<!-- Toast -->
+<div id="music-toast"
+     class="position-fixed bottom-0 end-0 mb-5 me-3 p-3 bg-white rounded shadow text-dark fw-semibold"
+     style="z-index: 9999; display: none; transition: opacity 0.5s ease;">
+  Musik Dimatikan
+</div>
+
+  <!-- Footer -->
+  <footer class="bg-light text-center text-lg-start shadow-top bg-white">
+  <div class="container py-4">
+
+    <div class="row align-items-center">
+      <div class="col-md-6 text-md-start text-center mb-3 mb-md-0">
+        <h5 class="fw-bold text-primary">
+          <img src="/modul/foto/logo.png" alt="Logo" width="60" class="me-2">
+          Lahan Basah Hijau
+        </h5>
+        <p class="text-muted small mb-0">
+          Aplikasi pembelajaran interaktif berbasis STEM untuk mengenal, menjaga, dan mencintai lahan basah.
+        </p>
+      </div>
+      <div class="col-md-6 text-md-end text-center">
+        <ul class="list-inline mb-0">
+          <li class="list-inline-item mx-2"><a href="/modul/modul.html" class="text-decoration-none text-muted">Beranda</a></li>
+          <li class="list-inline-item mx-2"><a href="/kuis/kuis.html" class="text-decoration-none text-muted">Kuis</a></li>
+          <li class="list-inline-item mx-2"><a href="/simulasi/simulasi.html" class="text-decoration-none text-muted">Simulasi</a></li>
+          <li class="list-inline-item mx-2"><a href="/proyek/proyek.html" class="text-decoration-none text-muted">Proyek</a></li>
+          <li class="list-inline-item mx-2"><a href="/leaderboard/leaderboard.html" class="text-decoration-none text-muted">Papan Peringkat</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+  <div class="text-center bg-white py-3 border-top">
+    <small class="text-muted">© 2025 Lahan Basah Hijau. Semua hak dilindungi.</small>
+  </div>
+</footer>
+
+  <!-- Script -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="simulasi.js"></script>
+  <script>
+  const music = document.getElementById('bg-music');
+  const toggleBtn = document.getElementById('music-toggle');
+  const icon = document.getElementById('music-icon');
+  const toast = document.getElementById('music-toast');
+
+  function updateIcon() {
+    icon.textContent = music.paused ? '🔇' : '🔊';
+  }
+
+  function showToast(message) {
+    toast.textContent = message;
+    toast.style.display = 'block';
+    toast.style.opacity = '1';
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      setTimeout(() => (toast.style.display = 'none'), 500);
+    }, 2000);
+  }
+
+  toggleBtn.addEventListener('click', () => {
+    if (music.paused) {
+      music.play().then(() => {
+        updateIcon();
+        showToast('Musik Dinyalakan');
+      }).catch(() => {});
+    } else {
+      music.pause();
+      updateIcon();
+      showToast('Musik Dimatikan');
+    }
+  });
+
+  // Autoplay fix: play after first interaction if needed
+  document.addEventListener('DOMContentLoaded', () => {
+    const tryPlay = () => {
+      if (music.paused) {
+        music.play().then(updateIcon).catch(() => {});
+      } else {
+        updateIcon();
+      }
+      document.body.removeEventListener('click', tryPlay);
+    };
+    document.body.addEventListener('click', tryPlay);
+  });
+  AOS.init();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Proyek Ekosistem - Lahan Basah Hijau</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka&display=swap" rel="stylesheet">
+
+  <!-- Gaya CSS dari halaman beranda -->
+  <style>
+    html,
+    body {
+      font-family: 'Fredoka', sans-serif;
+      background-color: #f0faff;
+       height: 100%;
+  margin: 0;
+
+    }
+
+    .navbar-nav .nav-link {
+      padding: 8px 16px;
+      transition: all 0.3s ease;
+      border-radius: 20px;
+    }
+    .navbar-nav .nav-link:hover {
+      background-color: #f0f8ff;
+      color: #0d6efd;
+    }
+    .navbar-nav .nav-link.active {
+      background-color: #d1e7ff;
+      color: #0d6efd;
+    }
+
+    
+    .hero {
+      background: linear-gradient(to bottom, #b3e9ff, #d1fce5);
+      padding: 100px 20px 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border-radius: 0 0 60px 60px;
+      border: 4px solid rgba(255,255,255,0.6);
+    }
+    .hero-title {
+      color: #035397;
+      font-size: 3rem;
+      font-weight: 700;
+      text-shadow: 2px 2px #ffffff;
+    }
+    .hero-subtitle {
+      color: #0b6c5f;
+      font-size: 1.25rem;
+      margin-bottom: 20px;
+    }
+    .main-button {
+      background-color: #2e8b57;
+      color: white;
+      font-size: 1.1rem;
+      padding: 12px 32px;
+      border-radius: 40px;
+      margin-top: 20px;
+      transition: all 0.3s ease;
+      display: inline-block;
+      text-decoration: none;
+    }
+    .main-button:hover {
+      background-color: #256b45;
+    }
+   .bird { 
+      position: absolute;
+      top: 80px;
+      left: -100px;
+      width: 5%;
+      animation: flyBird 10s linear infinite;
+      animation-delay: 0s;
+      z-index: 1;
+    }
+
+    .bird1 {
+      position: absolute;
+      top: 100px;
+      left: -150px;
+      width: 5%;
+      animation: flyBird 15s linear infinite;
+      animation-delay: 5s;
+      z-index: 1;
+    }
+
+    .bird2 {
+      position: absolute;
+      top: 50px;
+      left: -200px;
+      width: 10%;
+      animation: flyBird 20s linear infinite;
+      animation-delay: 10s;
+      z-index: 1;
+    }
+
+    .bird3 {
+      position: absolute;
+      top: 50px;
+      left: -200px;
+      width: 10%;
+      animation: flyBird 25s linear infinite;
+      animation-delay: 15s;
+      z-index: 1;
+    }
+
+    .bird4 {
+      position: absolute;
+      top: 50px;
+      left: -150px;
+      width: 10%;
+      animation: flyBird 20s linear infinite;
+      animation-delay: 5s;
+      z-index: 1;
+    }
+
+    .bird5 {
+      position: absolute;
+      top: 50px;
+      left: -200px;
+      width: 10%;
+      animation: flyBird 15s linear infinite;
+      animation-delay: 12s;
+      z-index: 1;
+    }
+    
+    @keyframes flyBird {
+      0% { transform: translateX(0) rotate(0deg); }
+      100% { transform: translateX(120vw) rotate(10deg); }
+    }
+
+    .cloud {
+      position: absolute;
+      top: -70px;
+      left: 10%;
+      width: 30%;
+      animation: floatCloud 40s linear infinite;
+    }
+    .cloud2 {
+      top: 60px;
+      position: absolute;
+      left: 60%;
+      width: 30%;
+      animation: floatCloud 40s linear infinite;
+      animation-delay: 50s linear infinite;
+    }
+
+    @keyframes floatCloud {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(100vw); }
+    }
+
+    .hero img.peneliti {
+      position: absolute;
+      left: 100px;
+      bottom: -80px;
+      max-height: 350px;
+      width: auto;
+      animation: swayPeneliti 4s ease-in-out infinite;
+      z-index: 2;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    @keyframes swayPeneliti {
+      0% { transform: rotate(0deg) translateY(0); }
+      25% { transform: rotate(-2deg) translateY(2px); }
+      50% { transform: rotate(0deg) translateY(0); }
+      75% { transform: rotate(2deg) translateY(-2px); }
+      100% { transform: rotate(0deg) translateY(0); }
+    }
+
+.gallery-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #000;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+  padding-top: 50px;
+}
+
+.gallery-title::before {
+  content: '🖼️';
+  font-size: 1.5rem;
+}
+
+.gallery-desc {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.project-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  margin-bottom: 1.2rem;
+  break-inside: avoid;
+  width: 100%;
+  display: block; /* penting! */
+}
+
+
+.project-card img.project-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px 12px 0 0;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.project-info {
+  padding: 10px;
+  background: #f9fff9;
+   font-family: 'Nunito', sans-serif;
+}
+
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+
+.project-info h6 {
+  margin: 0 0 0.25rem 0;
+  font-weight: 700;
+}
+
+.project-info p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #444;
+}
+
+
+
+    @media (max-width: 768px) {
+      .hero {
+        display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 80px 20px 40px;
+    text-align: center;
+    padding-bottom: -0px;
+      }
+      .hero-title { font-size: 2.2rem; }
+      .hero-subtitle { font-size: 1rem; }
+      .main-button {
+        font-size: 1rem;
+    padding: 10px 24px;
+    margin-top: 10px;
+      }
+      .hero img.peneliti {
+    max-height: 300px;
+    animation: bounce 2.5s ease-in-out infinite;
+    width: auto;
+    height: auto;
+    position: static;
+  }
+
+  .cloud,
+  .cloud2,
+  .cloud3,
+  .bird,
+  .bird1 {
+    margin-top: 80px;
+  }
+    }
+    #galeri .card {
+  border: none;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+  background-color: #fffdfb;
+  margin-left: 10px;
+  padding: 10px;
+}
+#galeri .card:hover {
+  transform: translateY(-5px);
+}
+#galeri .card-body {
+  background-color: #f4fef8;
+}
+
+#form-proyek {
+  background: linear-gradient(135deg, #e0f7fa, #fff);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  margin-bottom: 40px;
+  border: 2px dashed #66bb6a;
+  transition: all 0.3s ease;
+  max-width: 83%;
+  margin: 0 auto;
+}
+
+#form-proyek:hover {
+  transform: scale(1.01);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+#form-proyek label {
+  font-weight: bold;
+}
+
+#form-proyek input[type="text"],
+#form-proyek input[type="email"],
+#form-proyek input[type="password"],
+#form-proyek textarea,
+#form-proyek input[type="file"] {
+  border-radius: 12px;
+  border: 1px solid #a5d6a7;
+  padding: 12px;
+  font-size: 15px;
+}
+
+#form-proyek button[type="submit"] {
+  background-color: #43a047;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 12px;
+  border-radius: 14px;
+  transition: background-color 0.3s ease;
+}
+
+#form-proyek button[type="submit"]:hover {
+  background-color: #2e7d32;
+}
+
+
+
+
+.container-inspirasi {
+  background: linear-gradient(135deg, #e0f7fa, #f1f8e9);
+  padding: 1.5rem 2rem;
+  margin: 1.5rem auto;
+  border-radius: 20px;
+  max-width: 100%;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.judul-inspirasi {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #2e7d32; /* hijau tua */
+  font-family: 'Poppins', sans-serif;
+}
+
+.daftar-inspirasi {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.daftar-inspirasi li {
+  font-size: 1.05rem;
+  color: #444;
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: start;
+  font-family: 'Nunito', sans-serif;
+}
+
+.galeri-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+
+  footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #f0f0f0;
+  position: relative;
+}
+
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper main {
+  flex: 1;
+}
+
+#notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #fff8dc;
+  color: #333;
+  padding: 12px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  font-size: 14px;
+  z-index: 9999;
+  transition: all 0.3s ease;
+  border: 1px solid #ffe58f;
+}
+
+/* === LOGIN WRAPPER === */
+#login-card {
+  background: linear-gradient(135deg, #fce4ec, #f3e5f5);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  margin-bottom: 30px;
+  border: 2px dotted #ba68c8;
+  text-align: center;
+  max-width: 400px;
+  margin: auto;
+}
+
+#login-card input[type="email"],
+#login-card input[type="password"] {
+  width: 100%;
+  padding: 12px 16px;
+  margin-bottom: 15px;
+  border: 1px solid #ce93d8;
+  border-radius: 14px;
+  background-color: #fff8fd;
+  font-size: 15px;
+  outline: none;
+  transition: 0.3s;
+}
+
+#login-card input:focus {
+  border-color: #ab47bc;
+  box-shadow: 0 0 5px rgba(171, 71, 188, 0.4);
+}
+
+/* === BUTTON STYLES === */
+#login-card button,
+#logoutBtn {
+  background-color: #ba68c8;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  margin: 6px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#login-card button:hover,
+#logoutBtn:hover {
+  background-color: #9c27b0;
+  transform: scale(1.05);
+}
+
+/* === LOGOUT BUTTON POSITION (centered below form) === */
+#logoutBtn {
+  display: none;
+  margin: 20px auto;
+  display: block;
+  text-align: center;
+}
+
+.cute-instruction {
+  background: linear-gradient(90deg, #ffe0f0, #e0f7fa);
+  padding: 15px 20px;
+  border: 2px dashed #ba68c8;
+  border-radius: 15px;
+  color: #6a1b9a;
+  font-size: 1.1rem;
+  box-shadow: 0 0 10px rgba(186, 104, 200, 0.3);
+  animation: popFade 0.6s ease-in-out;
+}
+
+@keyframes popFade {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.galeri-columns {
+  column-count: 3;
+  column-gap: 1.2rem;
+  padding: 1rem;
+}
+
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+ <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top" style="z-index: 1030;">
+  <div class="container">
+    <!-- Logo -->
+    <a class="navbar-brand fw-bold text-primary" href="/modul/modul.html">
+      <img src="/modul/foto/logo.png" alt="Logo" width="60" class="me-2" />
+      Lahan Basah Hijau
+    </a>
+
+    <!-- Toggler for mobile -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Menu -->
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav fw-semibold">
+        <li class="nav-item">
+          <a class="nav-link" href="/modul/modul.html">🏠 Beranda</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/kuis/kuis.html">🧠 Kuis</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/simulasi/simulasi.html">🧪 Simulasi</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/proyek/proyek.html">💡 Proyek</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/leaderboard/leaderboard.html">🏆 Papan Peringkat</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <img src="/modul/foto/daun1.png" class="bird" />
+    <img src="/modul/foto/daun2.png" class="bird1" />
+    <img src="/modul/foto/alat/7.png" class="bird2" />
+    <img src="/modul/foto/alat/7.png" class="bird3" />
+    <img src="/modul/foto/alat/8.png" class="bird4" />
+    <img src="/modul/foto/alat/9.png" class="bird5" />
+    <img src="/modul/foto/cloud1.png" class="cloud" />
+    <img src="/modul/foto/cloud2.png" class="cloud2" />
+    <h1 class="hero-title" data-aos="fade-down">Proyek Ekosistem</h1>
+    <p class="hero-subtitle" data-aos="fade-up">Tunjukkan hasil kreasimu tentang lahan basah!</p>
+    <a href="#gallery-title" class="main-button" data-aos="fade-up">Lihat Galeri Proyek Pengguna</a>
+    <img src="/modul/foto/peneliti.png" class="peneliti alt="Proyek" />
+  </section>
+
+  <!-- Konten Utama -->
+  <main class="container my-5">
+<p class="text-center mb-4" data-aos="fade-up" style="font-size: 1.05rem; color: #555;">
+  Buat sesuatu yang cemerlang untuk melindungi Lahan Basah kita!<br>
+  Lalu upload hasil kreasimu di sini dan
+  tunjukkan ide cemerlangmu kepada teman lainnya! 🌿✨
+</p>
+
+<div class="container-inspirasi">
+  <p class="judul-inspirasi">💡 Ide Proyek yang Bisa Kamu Coba:</p>
+  <ul class="daftar-inspirasi">
+    <li>♻️ Kerajinan dari daun kering atau sampah bersih</li>
+    <li>🌱 Menanam tumbuhan air di botol bekas</li>
+    <li>🧪 Eksperimen sederhana: filter air alami</li>
+    <li>📸 Foto lingkungan lahan basah di sekitarmu</li>
+    <li>🎨 Gambar atau poster bertema pelestarian lahan basah</li>
+    <li>🚯 Aksi bersih-bersih kecil di lingkungan rumah</li>
+  </ul>
+</div>
+  </main>
+ <!-- Form Login/Signup -->
+<div class="card shadow-lg border-0 rounded-4" id="form-proyek">
+      <div class="card-body">
+        <div class="text-center my-4" id="login-instruction">
+          <h4 style="color: #ba68c8;" class="cute-instruction text-center my-4">
+    Yuk masuk dulu, biar kamu bisa kirim karya kerenmu ke sini! 🎨🚀
+  </h4>
+</div>
+
+<div class="form-wrapper" id="login-card">
+  <input type="email" id="email" placeholder="📧 Email kamu">
+  <input type="password" id="password" placeholder="🔒 Kata sandi">
+  <button onclick="handleLogin()">🔓 Login</button>
+  <button onclick="handleSignup()">📝 Daftar</button>
+  <p id="login-message" style="color:red;"></p>
+</div>
+
+<!-- Tombol Logout -->
+<button id="logoutBtn" onclick="logout()" style="display:none;">🚪 Logout</button>
+
+    
+        <form id="form-proyek-form" style="display:none;">
+          <div class="mb-3">
+            <label for="nama" class="form-label">👩‍🔬 Nama Kamu</label>
+            <input type="text" class="form-control" id="nama" placeholder="Misalnya: Aulia" required>
+          </div>
+          <div class="mb-3">
+            <label for="deskripsi" class="form-label">📝 Deskripsi Proyek</label>
+            <textarea class="form-control" id="deskripsi" rows="3" placeholder="Apa yang kamu buat?" required></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="gambar" class="form-label">🖼️ Upload Gambar (maks 1MB)</label>
+            <input type="file" class="form-control" id="gambar" accept="image/*" required>
+          </div>
+          <div class="d-grid">
+            <button type="submit" class="btn btn-success btn-lg">🚀 Kirim Proyek</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Galeri Proyek -->
+   <div class="gallery-title" id="gallery-title">Galeri Proyek Pengguna</div>
+    <p class="gallery-desc">Lihat hasil karya dari teman-teman lain.</p>
+     <!-- Galeri Container -->
+    <p id="galeri-loading" style="text-align:center; font-size: 1.2rem;">✨ Tunggu bentar... galeri teman-teman sedang loading!</p>
+    <div class="galeri-container">
+      <div id="galeri" class="galeri-columns">
+        <!-- card diappend di sini -->
+      </div>
+        <!-- Kartu dimasukkan otomatis via JS -->
+    </div>
+  </div>
+
+    <div id="notification" style="position: fixed; top: 20px; right: 20px; background-color: #ffc0cb; color: #000; padding: 10px 20px; border-radius: 12px; display: none; box-shadow: 0 4px 6px rgba(0,0,0,0.1); z-index: 1000;">💬</div>
+
+    <!--Musik-->
+<audio id="bg-music" autoplay loop>
+  <source src="/modul/sound/sound2.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Tombol Musik -->
+<button id="music-toggle"
+        class="btn btn-light rounded-circle shadow position-fixed position-absolute d-flex align-items-center justify-content-center"
+        style="bottom: 20px; right: 20px; width: 50px; height: 50px; z-index: 9999;"
+        title="Nyalakan/Matikan Musik">
+  <span id="music-icon">🔊</span>
+</button>
+
+<!-- Toast -->
+<div id="music-toast"
+     class="position-fixed bottom-0 end-0 mb-5 me-3 p-3 bg-white rounded shadow text-dark fw-semibold"
+     style="z-index: 9999; display: none; transition: opacity 0.5s ease;">
+  Musik Dimatikan
+</div>
+
+
+<footer class="bg-light text-center text-lg-start shadow-top bg-white">
+  <div class="container py-4">
+
+    <div class="row align-items-center">
+      <div class="col-md-6 text-md-start text-center mb-3 mb-md-0">
+        <h5 class="fw-bold text-primary">
+          <img src="/modul/foto/logo.png" alt="Logo" width="60" class="me-2">
+          Lahan Basah Hijau
+        </h5>
+        <p class="text-muted small mb-0">
+          Aplikasi pembelajaran interaktif berbasis STEM untuk mengenal, menjaga, dan mencintai lahan basah.
+        </p>
+      </div>
+      <div class="col-md-6 text-md-end text-center">
+        <ul class="list-inline mb-0">
+          <li class="list-inline-item mx-2"><a href="/modul/modul.html" class="text-decoration-none text-muted">Beranda</a></li>
+          <li class="list-inline-item mx-2"><a href="/kuis/kuis.html" class="text-decoration-none text-muted">Kuis</a></li>
+          <li class="list-inline-item mx-2"><a href="/simulasi/simulasi.html" class="text-decoration-none text-muted">Simulasi</a></li>
+          <li class="list-inline-item mx-2"><a href="/proyek/proyek.html" class="text-decoration-none text-muted">Proyek</a></li>
+          <li class="list-inline-item mx-2"><a href="/leaderboard/leaderboard.html" class="text-decoration-none text-muted">Papan Peringkat</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+  <div class="text-center bg-white py-3 border-top">
+    <small class="text-muted">© 2025 Lahan Basah Hijau. Semua hak dilindungi.</small>
+  </div>
+</footer>
+
+  
+  
+
+  <!-- Script -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init();</script>
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="..." crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="..." crossorigin="anonymous"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script>
+  // === Firebase Config ===
+  const firebaseConfig = {
+    apiKey: "AIzaSyDguvGwMNqADw8vC2877IDvoxmnTvj1txU",
+    authDomain: "inovasi-stem-lahan-basah.firebaseapp.com",
+    databaseURL: "https://inovasi-stem-lahan-basah-default-rtdb.firebaseio.com",
+    projectId: "inovasi-stem-lahan-basah",
+    storageBucket: "inovasi-stem-lahan-basah.appspot.com",
+    messagingSenderId: "853863316290",
+    appId: "1:853863316290:web:721e94519c84e725f1a6db"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+  const auth = firebase.auth();
+
+  const form = document.getElementById("form-proyek");
+  const galeri = document.getElementById("galeri");
+
+  // === Login / Signup Logic ===
+  // LOGIN
+function handleLogin() {
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+
+  if (!email || !password) {
+    showNotification("Yuk, isi email dan kata sandi dulu!");
+    return;
+  }
+
+  auth.signInWithEmailAndPassword(email, password)
+    .then(() => {
+      showForm();
+    })
+    .catch(err => {
+      if (err.code === 'auth/invalid-credential' || err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password') {
+        showNotification("Ups! Email atau kata sandinya salah. Coba lagi, ya 😊");
+      } else {
+        showNotification("Hmm... Ada masalah waktu login. Coba cek koneksi atau ulangi nanti.");
+      }
+    });
+}
+
+// DAFTAR
+function handleSignup() {
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+
+  if (!email || !password) {
+    showNotification("Yuk, isi email dan kata sandinya dulu!");
+    return;
+  }
+
+  auth.createUserWithEmailAndPassword(email, password)
+    .then(() => {
+      showForm();
+    })
+    .catch(err => {
+      if (err.code === 'auth/email-already-in-use') {
+        showNotification("Email ini sudah pernah dipakai. Coba login aja, ya!");
+      } else if (err.code === 'auth/weak-password') {
+        showNotification("Kata sandinya terlalu pendek. Gunakan minimal 6 huruf atau angka.");
+      } else {
+        showNotification("Oops! Gagal mendaftar. Coba lagi sebentar lagi, ya.");
+      }
+    });
+}
+
+
+
+  function logout() {
+    auth.signOut().then(() => location.reload());
+  }
+
+  function showForm() {
+    document.getElementById('login-card').style.display = 'none';
+    document.getElementById('login-instruction').style.display = 'none';
+    document.getElementById('form-proyek-form').style.display = "block";
+    document.getElementById('logoutBtn').style.display = 'block';
+  }
+
+  auth.onAuthStateChanged(user => {
+    if (user) {
+      showForm();
+    }
+  });
+
+  // === Form Submit Logic ===
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+
+    const user = firebase.auth().currentUser;
+    if (!user) {
+      alert("Harap login terlebih dahulu.");
+      return;
+    }
+
+    const nama = document.getElementById("nama").value.trim();
+    const deskripsi = document.getElementById("deskripsi").value.trim();
+    const gambarInput = document.getElementById("gambar");
+    const file = gambarInput.files[0];
+
+    if (!nama || !deskripsi || !file) {
+      showNotification("Harap isi semua form dan upload gambar.");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function (event) {
+      const base64 = event.target.result;
+
+      const data = {
+        nama,
+        deskripsi,
+        gambar: base64,
+        waktu: new Date().toISOString()
+      };
+
+      db.ref("proyek").push(data);
+      showNotification("Proyek berhasil dikirim!");
+      form.reset();
+      tampilkanGaleri();
+    };
+
+    reader.readAsDataURL(file);
+  });
+
+function tampilkanGaleri() {
+  galeri.innerHTML = "";
+
+  // Tampilkan teks loading
+  const loadingText = document.getElementById("galeri-loading");
+  loadingText.style.display = "block";
+
+  db.ref("proyek").once("value", snapshot => {
+    if (!snapshot.exists()) {
+      galeri.innerHTML = "<p class='text-center'>Belum ada proyek yang diupload.</p>";
+      loadingText.style.display = "none";
+      return;
+    }
+
+    const tempCards = []; // untuk simpan sementara elemen card
+    const gambarList = []; // untuk tracking gambar yang harus dimuat
+
+    snapshot.forEach(child => {
+      const { nama, deskripsi, gambar } = child.val();
+
+      const card = document.createElement("div");
+      card.className = "col";
+      card.innerHTML = `
+        <div class="project-card">
+          <img src="${gambar}" alt="proyek ${nama}" class="project-image" />
+          <div class="project-info">
+            <h6>${nama}</h6>
+            <p>${deskripsi}</p>
+          </div>
+        </div>
+      `;
+
+      const img = card.querySelector("img");
+      gambarList.push(img);
+
+      tempCards.push(card);
+    });
+
+    // Setelah semua gambar dimuat, tampilkan kartu & hilangkan loading
+    let loadedCount = 0;
+    gambarList.forEach(img => {
+      img.onload = () => {
+        loadedCount++;
+        if (loadedCount === gambarList.length) {
+          // Tambahkan semua kartu ke galeri setelah gambar dimuat
+          tempCards.forEach(card => galeri.appendChild(card));
+          loadingText.style.display = "none";
+        }
+      };
+
+      // Jika gambar gagal dimuat, tetap anggap "selesai"
+      img.onerror = () => {
+        loadedCount++;
+        if (loadedCount === gambarList.length) {
+          tempCards.forEach(card => galeri.appendChild(card));
+          loadingText.style.display = "none";
+        }
+      };
+    });
+  });
+}
+
+
+  window.onload = tampilkanGaleri;
+
+  
+
+  function showNotification(message) {
+  const notif = document.getElementById("notification");
+  notif.innerText = message;
+  notif.style.display = "block";
+
+  setTimeout(() => {
+    notif.style.display = "none";
+  }, 4000);
+}
+
+const music = document.getElementById('bg-music');
+  const toggleBtn = document.getElementById('music-toggle');
+  const icon = document.getElementById('music-icon');
+  const toast = document.getElementById('music-toast');
+
+  function updateIcon() {
+    icon.textContent = music.paused ? '🔇' : '🔊';
+  }
+
+  function showToast(message) {
+    toast.textContent = message;
+    toast.style.display = 'block';
+    toast.style.opacity = '1';
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      setTimeout(() => (toast.style.display = 'none'), 500);
+    }, 2000);
+  }
+
+  toggleBtn.addEventListener('click', () => {
+    if (music.paused) {
+      music.play().then(() => {
+        updateIcon();
+        showToast('Musik Dinyalakan');
+      }).catch(() => {});
+    } else {
+      music.pause();
+      updateIcon();
+      showToast('Musik Dimatikan');
+    }
+  });
+
+  // Autoplay fix: play after first interaction if needed
+  document.addEventListener('DOMContentLoaded', () => {
+    const tryPlay = () => {
+      if (music.paused) {
+        music.play().then(updateIcon).catch(() => {});
+      } else {
+        updateIcon();
+      }
+      document.body.removeEventListener('click', tryPlay);
+    };
+    document.body.addEventListener('click', tryPlay);
+  });
+  AOS.init();
+</script>
+
+
+</body>
+</html>
